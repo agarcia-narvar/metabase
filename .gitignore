@@ -4,7 +4,7 @@
 *.log
 *.po~
 *.sqlite
-*.trace.db
+# *.trace.db
 *.xcworkspacedata
 .DS_Store
 .\#*
@@ -15,8 +15,8 @@
 .vscode
 /*.h2.db
 /*.lock.db
-/*.mv.db
-/*.trace.db
+# /*.mv.db
+# /*.trace.db
 /.babel_cache
 /.env
 /.lein-env
