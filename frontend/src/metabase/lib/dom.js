@@ -305,6 +305,11 @@ export function openInBlankWindow(url) {
   clickLink(url.startsWith("/") ? siteUrl + url : url, true);
 }
 
+export function openInSameWindow(url) {
+  const siteUrl = MetabaseSettings.get("site-url");
+  clickLink(url.startsWith("/") ? siteUrl + url : url, false);
+}
+
 function clickLink(url, blank = false) {
   const a = document.createElement("a");
   a.style.display = "none";
@@ -344,6 +349,13 @@ export function shouldOpenInBlankWindow(
     return true;
   }
   return false;
+}
+
+const originsForSameWindow = new Set(["https://google.com"]);
+
+export function shouldOpenInSameWindow(url) {
+  const parsedUrl = new URL(url);
+  return originsForSameWindow.has(parsedUrl.origin);
 }
 
 const a = document.createElement("a"); // reuse the same tag for performance

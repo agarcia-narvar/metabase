@@ -290,6 +290,13 @@ class TableSimple extends Component {
                       const isClickable =
                         !isLink && this.visualizationIsClickable(clicked);
 
+                      // if (columnIndex === 11) {
+                      //   console.log({
+                      //     isLink,
+                      //     isClickable,
+                      //   });
+                      // }
+
                       // Choose a column that we will force to use the click overrides
                       // Hardcode to the username column
                       const USERNAME_COL_IDX = 9;

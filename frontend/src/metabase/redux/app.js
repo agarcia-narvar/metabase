@@ -8,7 +8,9 @@ import {
 import {
   isSmallScreen,
   openInBlankWindow,
+  openInSameWindow,
   shouldOpenInBlankWindow,
+  shouldOpenInSameWindow,
 } from "metabase/lib/dom";
 
 export const SET_ERROR_PAGE = "metabase/app/SET_ERROR_PAGE";
@@ -21,7 +23,9 @@ export function setErrorPage(error) {
 }
 
 export const openUrl = (url, options) => dispatch => {
-  if (shouldOpenInBlankWindow(url, options)) {
+  if (shouldOpenInSameWindow(url)) {
+    openInSameWindow(url);
+  } else if (shouldOpenInBlankWindow(url, options)) {
     openInBlankWindow(url);
   } else {
     dispatch(push(url));
