@@ -99,8 +99,16 @@ class TableSimple extends Component {
   onValueClick = (rowIndex, columnIndex) => {
     console.log("On value click!", { data: this.props.data.rows[rowIndex] });
 
-    this.setOverlayValue(rowIndex, columnIndex, "Updated!");
-    this.forceUpdate(); // hack: should probably use this.state or useState
+    const currentValue = this.getDataValue(rowIndex, columnIndex);
+
+    this.setOverlayValue(
+      rowIndex,
+      columnIndex,
+      typeof currentValue === "string"
+        ? currentValue.toUpperCase()
+        : currentValue,
+    );
+    this.forceUpdate(); // FIXME: should probably use this.state or useState to naturally trigger a render
   };
 
   setOverlayValue = (rowIndex, columnIndex, value) => {
@@ -108,12 +116,7 @@ class TableSimple extends Component {
       this.overlayValues[rowIndex] = [];
     }
 
-    const currentValue = this.getDataValue(rowIndex, columnIndex);
-
-    this.overlayValues[rowIndex][columnIndex] =
-      typeof currentValue === "string"
-        ? currentValue.toUpperCase()
-        : currentValue;
+    this.overlayValues[rowIndex][columnIndex] = value;
   };
 
   // returns null if not set
@@ -122,7 +125,7 @@ class TableSimple extends Component {
       return null;
     }
 
-    return this.overlayValues[rowIndex][columnIndex] || null;
+    return this.overlayValues[rowIndex][columnIndex] ?? null;
   };
 
   getDataValue = (rowIndex, columnIndex) => {
@@ -290,15 +293,9 @@ class TableSimple extends Component {
                       const isClickable =
                         !isLink && this.visualizationIsClickable(clicked);
 
-                      // if (columnIndex === 11) {
-                      //   console.log({
-                      //     isLink,
-                      //     isClickable,
-                      //   });
-                      // }
-
                       // Choose a column that we will force to use the click overrides
                       // Hardcode to the username column
+                      // In the future, we can inspect the column settings from props and if a column matches a predefined set of column types then add an override onclick handler
                       const USERNAME_COL_IDX = 9;
                       const isClickOverride = columnIndex === USERNAME_COL_IDX;
 

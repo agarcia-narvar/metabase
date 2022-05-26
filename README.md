@@ -1,10 +1,30 @@
-# POC
+# Metabase Custom React Components POC
 
 Credentials for test database:
 
 ```
 joe.admin@example.com / joeadmin123
 ```
+
+## Setup
+
+Pre-req: `yarn` installed (`npm install -g yarn`)
+
+Install dependencies:
+
+```js
+yarn;
+```
+
+Run dev server:
+
+```js
+yarn dev
+```
+
+This runs the backend and frontend, and will reference the checked in test database in `metabase.db`.
+
+[Dev setup reference](https://www.metabase.com/docs/latest/developers-guide/devenv.html)
 
 # Metabase
 

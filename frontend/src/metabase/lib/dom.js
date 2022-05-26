@@ -354,8 +354,12 @@ export function shouldOpenInBlankWindow(
 const originsForSameWindow = new Set(["https://google.com"]);
 
 export function shouldOpenInSameWindow(url) {
-  const parsedUrl = new URL(url);
-  return originsForSameWindow.has(parsedUrl.origin);
+  try {
+    const parsedUrl = new URL(url);
+    return originsForSameWindow.has(parsedUrl.origin);
+  } catch (e) {
+    return false;
+  }
 }
 
 const a = document.createElement("a"); // reuse the same tag for performance
